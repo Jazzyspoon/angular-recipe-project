@@ -2,17 +2,17 @@
   <div class="col-xs-12">
     <form>
       <div class="row">
-        <div class="col-sm-5">
-          <label for="itemName">Name</label>
-          <input type="text" class="form-control" id="name" placeholder="Item name">
+        <div class="col-sm-5 form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="item name" #nameInput>
         </div>
         <div class="col sm-2">
           <label for="amount">Amount</label>
-          <input type="number" class="form-control" id="amount" placeholder="Quantity">
+          <input type="number" class="form-control" id="amount" placeholder="Quantity" #amountInput>
         </div>
         <div class="row">
           <div class="col-xs-12">
-            <button class="btn btn-success" type="submit">Add</button>
+            <button class="btn btn-success" type="submit" (click)="onAddItem()">Add</button>
             <button class="btn btn-danger" type="button">Delete</button>
             <button class="btn btn-primary" type="button">Clear</button>
           </div>
