@@ -19,8 +19,8 @@
         </button>
         <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
           <li><a ngbDropdownItem style="cursor: pointer" (click)="onAddToShoppingList()">to shopping list</a></li>
-          <li><a ngbDropdownItem href="#">Edit recipe</a></li>
-          <li><a ngbDropdownItem href="#">Delete recipe</a></li>
+          <li><a ngbDropdownItem (click)="onEditRecipe()">Edit recipe</a></li>
+          <li><a ngbDropdownItem>Delete recipe</a></li>
         </ul>
       </ul>
     </div>

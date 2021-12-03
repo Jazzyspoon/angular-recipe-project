@@ -1,14 +1,12 @@
+<app-header-component></app-header-component>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-header-component (featureSelected)="onNavigate($event)"></app-header-component>
-      <app-recipes-component *ngIf="loadedFeature === 'recipe'"></app-recipes-component>
-      <app-shoppinglist-component *ngIf="loadedFeature !== 'recipe'"></app-shoppinglist-component>
+      <router-outlet></router-outlet>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-
       <hr>
       <app-footer-component></app-footer-component>
     </div>

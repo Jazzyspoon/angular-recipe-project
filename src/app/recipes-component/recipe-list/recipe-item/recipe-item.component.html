@@ -1,4 +1,5 @@
-<a href="#" class="list-group-item clearfix border" (click)="onSelected()" style="max-width:380px;">
+<a class="list-group-item clearfix border" style="max-width:380px; cursor:pointer;" [routerLink]="[index]"
+  routerLinkActive="active">
   <div class="float-start">
     <h4 class="list-group-item-heading">
       {{recipe.name}}

@@ -9,20 +9,20 @@
     <div class="collapse navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true"
       id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="onSelect('recipe')">Recipes</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/recipes">Recipes</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="onSelect('shopping-list')">Shopping List</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/shopping-list">Shopping List</a>
         </li>
         <ul ngbDropdown class="dropdown">
-          <li class="nav-link" ngbDropdownToggle id="dropdownMenuButton1" aria-expanded="false">
+          <li class="nav-link" ngbDropdownToggle id="dropdownMenuButton1" style="cursor:pointer;" aria-expanded="false">
             Manage
           </li>
-          <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
-            <li><a ngbDropdownItem href="#">Save Data</a></li>
-            <li><a ngbDropdownItem href="#">Delete Data</a></li>
+          <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1" style="cursor:pointer;">
+            <li><a ngbDropdownItem>Save Data</a></li>
+            <li><a ngbDropdownItem>Delete Data</a></li>
 
           </ul>
         </ul>
