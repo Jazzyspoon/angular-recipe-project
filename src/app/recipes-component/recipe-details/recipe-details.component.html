@@ -11,6 +11,11 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
+    {{recipe.description}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
     <div class="btn-group">
       <ul ngbDropdown class="dropdown">
         <button class="btn btn-primary dropdown-toggle" ngbDropdownToggle id="dropdownMenuButton1"
@@ -29,10 +34,11 @@
 
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-12">
-    {{recipe.description}}
-  </div>
+<div class="row" style="padding-bottom: 10px;">
+  <p style="text-decoration: underline;">Preparation and Cooking:</p>
+  <ul class="col-xs-12">
+    {{recipe.instructions }}
+  </ul>
 </div>
 <div class="row">
   <div class="col-xs-12">

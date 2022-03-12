@@ -23,7 +23,8 @@ export class RecipeServices {
         new Ingredient('Parsley', 1, 'oz'),
         new Ingredient('Salt', 1, 'teaspoon'),
         new Ingredient('Pepper', 0.5, 'teaspoon'),
-      ]
+      ],
+      'In a large skillet, heat oil over medium-high heat. Add chicken and cook until no longer pink, about 5 minutes. Add pasta and cook until al dente, about 5 minutes. Add tomato, onion, garlic, parsley, salt, and pepper to the pasta and cook until pasta is cooked through, about 5 minutes. Serve pasta with chicken.'
     ),
     new Recipe(
       'Avocado bean Soup',
@@ -36,7 +37,8 @@ export class RecipeServices {
         new Ingredient('Pepper', 1, 'teaspoon'),
         new Ingredient('Onion', 1, 'each'),
         new Ingredient('Onion Powder', 1, 'oz'),
-      ]
+      ],
+      'In a large pot, bring water to a boil. Add beans and cook until tender, about 10 minutes. Drain beans and rinse under cold water.'
     ),
   ];
 
