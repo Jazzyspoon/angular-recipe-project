@@ -9,8 +9,8 @@
 
         <div class="col sm-2">
           <label for="amount">Amount</label>
-          <input type="number" min="0" step="1" class="form-control" id="amount" name="amount" ngModel required
-            pattern="^[1-9]+[0-9]*$">
+          <input type="number" min="0" step="any" class="form-control" id="amount" name="amount" ngModel required
+            pattern="^(0|[1-9]\d*)(\.\d+)?$">
         </div>
         <div class="col sm-2">
           <label for="amount">Uom</label>
