@@ -14,16 +14,28 @@ export class RecipeServices {
       'Chicken Pasta',
       'A delicious, heart-warming meal for the whole family.',
       'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/slow-cooker-spanish-chicken-4b787a1.jpg?quality=90&webp=true&resize=375,341',
-      [new Ingredient('Chicken', 1), new Ingredient('Pasta', 2)]
+      [
+        new Ingredient('Chicken chopped', 1, 'pound'),
+        new Ingredient('Pasta', 1, 'package'),
+        new Ingredient('Tomato chopped', 1, 'each'),
+        new Ingredient('Onion chopped', 1, 'each'),
+        new Ingredient('Garlic', 1, 'clove'),
+        new Ingredient('Parsley', 1, 'oz'),
+        new Ingredient('Salt', 1, 'teaspoon'),
+        new Ingredient('Pepper', 0.5, 'teaspoon'),
+      ]
     ),
     new Recipe(
       'Avocado bean Soup',
       'This cool, refreshing meal is a fan favorite amongst foodies looking for a nutrient dense meal.',
       'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F7273647.jpg&w=596&h=596&c=sc&poi=face&q=85',
       [
-        new Ingredient('Avocado', 1),
-        new Ingredient('Beans', 2),
-        new Ingredient('Soup', 1),
+        new Ingredient('Avocado', 1, 'each'),
+        new Ingredient('Beans', 2, 'each'),
+        new Ingredient('Salt', 1, 'teaspoon'),
+        new Ingredient('Pepper', 1, 'teaspoon'),
+        new Ingredient('Onion', 1, 'each'),
+        new Ingredient('Onion Powder', 1, 'oz'),
       ]
     ),
   ];

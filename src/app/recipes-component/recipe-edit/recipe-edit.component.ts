@@ -63,6 +63,7 @@ export class RecipeEditComponent implements OnInit {
     let recipeName = '';
     let recipeImagePath = '';
     let recipeDescription = '';
+
     let recipeIngredients = new FormArray([]);
     if (this.editMode) {
       const recipe = this.recipeService.getRecipe(this.id);
@@ -78,6 +79,7 @@ export class RecipeEditComponent implements OnInit {
                 Validators.required,
                 Validators.pattern(/^[1-9]+[0-9]*$/),
               ]),
+              uom: new FormControl(ingredient.uom, Validators.required),
             })
           );
         }

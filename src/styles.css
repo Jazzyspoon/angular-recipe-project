@@ -14,3 +14,11 @@ body {
 .nav-item {
   margin: 0 10px;
 }
+img {
+  border-radius: 20px;
+  margin-top: 20px;
+}
+.btn {
+  border-radius: 20px;
+  padding: 10px;
+}
