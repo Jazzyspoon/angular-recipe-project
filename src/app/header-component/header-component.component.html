@@ -21,8 +21,8 @@
             Manage
           </li>
           <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1" style="cursor:pointer;">
-            <li><a ngbDropdownItem>Save Data</a></li>
-            <li><a ngbDropdownItem>Delete Data</a></li>
+            <li><a ngbDropdownItem (click)="onSaveData()">Save Data</a></li>
+            <li><a ngbDropdownItem (click)="onFetchData()">Fetch Data</a></li>
 
           </ul>
         </ul>
