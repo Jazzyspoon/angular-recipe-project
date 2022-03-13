@@ -19,6 +19,7 @@ import { RecipeEditComponent } from './recipes-component/recipe-edit/recipe-edit
 import { RecipeServices } from './recipes-component/recipe.service';
 import { LinebreakPipe } from './linebreak.pipe';
 import { HtmlPipe } from './html.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { HtmlPipe } from './html.pipe';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [ShoppingListService, RecipeServices],
   bootstrap: [AppComponent],
