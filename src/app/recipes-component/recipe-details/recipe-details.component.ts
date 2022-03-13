@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
 import { RecipeServices } from '../recipe.service';
+import { LinebreakPipe } from 'src/app/linebreak.pipe';
 @Component({
   selector: 'app-recipe-details',
   templateUrl: './recipe-details.component.html',
@@ -10,6 +11,8 @@ import { RecipeServices } from '../recipe.service';
 export class RecipeDetailsComponent implements OnInit {
   recipe: Recipe;
   id: number;
+  linebreak: LinebreakPipe;
+
   constructor(
     private recipeService: RecipeServices,
     private route: ActivatedRoute,

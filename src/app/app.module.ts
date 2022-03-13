@@ -17,6 +17,8 @@ import { ShoppingListService } from './shoppinglist-component/shoppinglist.servi
 import { RecipeStartComponent } from './recipes-component/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes-component/recipe-edit/recipe-edit.component';
 import { RecipeServices } from './recipes-component/recipe.service';
+import { LinebreakPipe } from './linebreak.pipe';
+import { HtmlPipe } from './html.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { RecipeServices } from './recipes-component/recipe.service';
     DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
+    LinebreakPipe,
+    HtmlPipe,
   ],
   imports: [
     BrowserModule,

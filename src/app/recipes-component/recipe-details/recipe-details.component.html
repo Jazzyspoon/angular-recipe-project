@@ -11,16 +11,16 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    {{recipe.description}}
+    "{{recipe.description}}"
   </div>
 </div>
-<div class="row">
+<div class="row" style="margin-left: -50px;">
   <div class="col-xs-12">
     <div class="btn-group">
       <ul ngbDropdown class="dropdown">
         <button class="btn btn-primary dropdown-toggle" ngbDropdownToggle id="dropdownMenuButton1"
           aria-expanded="false">
-          Manage Recipe
+          Edit This Recipe
         </button>
         <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
           <li><a ngbDropdownItem style="cursor: pointer" (click)="onAddToShoppingList()">Add Ingredients to shopping
@@ -36,9 +36,8 @@
 </div>
 <div class="row" style="padding-bottom: 10px;">
   <p style="text-decoration: underline;">Preparation and Cooking:</p>
-  <ul class="col-xs-12">
-    {{recipe.instructions }}
-  </ul>
+  <div class="col-xs-12" innerHTML="{{recipe.instructions | htMl | lineBreak}}">
+  </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
