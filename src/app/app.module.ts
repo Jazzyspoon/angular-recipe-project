@@ -20,6 +20,8 @@ import { RecipeServices } from './recipes-component/recipe.service';
 import { LinebreakPipe } from './linebreak.pipe';
 import { HtmlPipe } from './html.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     RecipeEditComponent,
     LinebreakPipe,
     HtmlPipe,
+    AuthComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
