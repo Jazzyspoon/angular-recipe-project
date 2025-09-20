@@ -13,7 +13,6 @@ export class Recipe {
   public description: string;
   public imagePath: string;
   public ingredients: Ingredient[];
-  public uom: string;
   public instructions: string; // Keep for backward compatibility
   public steps?: RecipeStep[]; // New structured steps
 
