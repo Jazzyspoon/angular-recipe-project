@@ -5,7 +5,9 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths": {
-      "tslib": ["path/to/node_modules/tslib/tslib.d.ts"]
+      "tslib": [
+        "path/to/node_modules/tslib/tslib.d.ts"
+      ]
     },
     "sourceMap": true,
     "declaration": false,
@@ -13,9 +15,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
-    "lib": ["es2018", "dom"]
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
