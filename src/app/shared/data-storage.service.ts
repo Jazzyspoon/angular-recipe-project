@@ -1,44 +1,67 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { RecipeServices } from '../recipes-component/recipe.service';
 import { Recipe } from '../recipes-component/recipe.model';
-import { map, tap } from 'rxjs/operators';
+import { IndexedDBService } from './indexeddb.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class dataStorageService {
   constructor(
-    private http: HttpClient,
-    private recipeService: RecipeServices
+    private recipeService: RecipeServices,
+    private indexedDBService: IndexedDBService
   ) {}
 
-  storeRecipes() {
-    const recipes = this.recipeService.getRecipes();
-    this.http
-      .put(
-        'https://pottorff-recipe-book-default-rtdb.firebaseio.com/recipes.json',
-        recipes
-      )
-      .subscribe((response) => {
-        console.log(response);
-      });
+  /**
+   * Store recipes to IndexedDB
+   * Note: Individual recipes are automatically stored when added/updated through RecipeService
+   * This method is kept for compatibility but doesn't need to do anything
+   */
+  storeRecipes(): Observable<boolean> {
+    // Recipes are automatically stored in IndexedDB through the RecipeService
+    // This method is kept for backward compatibility
+    return new Observable(observer => {
+      observer.next(true);
+      observer.complete();
+    });
   }
-  fetchRecipes() {
-    return this.http
-      .get<Recipe[]>(
-        'https://pottorff-recipe-book-default-rtdb.firebaseio.com/recipes.json'
-      )
-      .pipe(
-        map((recipes) => {
-          return recipes.map((recipe) => {
-            return {
-              ...recipe,
-              ingredients: recipe.ingredients ? recipe.ingredients : [],
-            };
-          });
-        }),
-        tap((recipes) => {
-          this.recipeService.setRecipes(recipes);
-        })
-      );
+
+  /**
+   * Fetch recipes from IndexedDB
+   */
+  fetchRecipes(): Observable<Recipe[]> {
+    return this.indexedDBService.getAllRecipes().pipe(
+      tap((recipes) => {
+        // Ensure ingredients array exists and convert to Recipe instances
+        const processedRecipes = recipes.map((recipe) => new Recipe(
+          recipe.name,
+          recipe.description,
+          recipe.imagePath,
+          recipe.ingredients ? recipe.ingredients : [],
+          recipe.instructions,
+          recipe.id,
+          recipe.steps
+        ));
+        this.recipeService.setRecipes(processedRecipes);
+      })
+    );
+  }
+
+  /**
+   * Clear all recipes from IndexedDB
+   */
+  clearAllRecipes(): Observable<boolean> {
+    return this.indexedDBService.clearAllRecipes().pipe(
+      tap(() => {
+        this.recipeService.setRecipes([]);
+      })
+    );
+  }
+
+  /**
+   * Search recipes in IndexedDB
+   */
+  searchRecipes(searchTerm: string): Observable<Recipe[]> {
+    return this.indexedDBService.searchRecipes(searchTerm);
   }
 }

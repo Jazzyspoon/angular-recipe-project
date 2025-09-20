@@ -9,7 +9,7 @@ import { RecipeServices } from '../recipe.service';
   styleUrls: ['./recipe-edit.component.css'],
 })
 export class RecipeEditComponent implements OnInit {
-  id: number;
+  id: string;
   editMode = false;
   recipeForm: UntypedFormGroup;
 
@@ -21,18 +21,33 @@ export class RecipeEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
+      this.id = params['id'];
       this.editMode = params['id'] != null;
       this.initForm();
     });
   }
   onSubmit() {
     if (this.editMode) {
-      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      this.recipeService.updateRecipeById(this.id, this.recipeForm.value).subscribe({
+        next: () => {
+          this.onCancel();
+        },
+        error: (error) => {
+          console.error('Failed to update recipe:', error);
+          // You could add user notification here
+        }
+      });
     } else {
-      this.recipeService.addRecipe(this.recipeForm.value);
+      this.recipeService.addRecipe(this.recipeForm.value).subscribe({
+        next: () => {
+          this.onCancel();
+        },
+        error: (error) => {
+          console.error('Failed to add recipe:', error);
+          // You could add user notification here
+        }
+      });
     }
-    this.onCancel();
   }
   onDeleteIngredient(index: number) {
     (<UntypedFormArray>this.recipeForm.get('ingredients')).removeAt(index);
@@ -67,7 +82,12 @@ export class RecipeEditComponent implements OnInit {
     let recipeInstructions = '';
     let recipeIngredients = new UntypedFormArray([]);
     if (this.editMode) {
-      const recipe = this.recipeService.getRecipe(this.id);
+      const recipe = this.recipeService.getRecipeById(this.id);
+      if (!recipe) {
+        // If recipe not found, navigate back to recipes
+        this.router.navigate(['/recipes']);
+        return;
+      }
       recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;

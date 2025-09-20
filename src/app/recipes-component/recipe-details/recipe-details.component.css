@@ -1,0 +1,106 @@
+/* Recipe Steps Styling */
+.recipe-steps {
+  margin-top: 15px;
+}
+
+.step-item {
+  padding: 15px;
+  border-left: 3px solid #007bff;
+  background-color: #f8f9fa;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 15px;
+}
+
+.step-number .badge {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.step-content p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.step-meta {
+  margin-top: 8px;
+}
+
+.step-meta i {
+  margin-right: 4px;
+}
+
+/* Print Styles */
+.print-only {
+  display: none;
+}
+
+@media print {
+  /* Hide screen elements */
+  .step-item,
+  .badge,
+  .btn,
+  .dropdown,
+  nav,
+  .navbar {
+    display: none !important;
+  }
+
+  /* Show print-only elements */
+  .print-only {
+    display: block !important;
+  }
+
+  .recipe-steps-print {
+    list-style-type: decimal;
+    padding-left: 20px;
+  }
+
+  .recipe-steps-print li {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    page-break-inside: avoid;
+  }
+
+  .step-meta-print {
+    font-style: italic;
+    color: #666;
+  }
+
+  /* General print styles */
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .step-number .badge {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+  }
+
+  .step-content p {
+    font-size: 14px;
+  }
+
+  .step-item {
+    padding: 10px;
+  }
+}

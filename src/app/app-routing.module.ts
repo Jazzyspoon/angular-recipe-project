@@ -2,11 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipesComponentComponent } from './recipes-component/recipes-component.component';
 import { ShoppinglistComponentComponent } from './shoppinglist-component/shoppinglist-component.component';
-import { RecipeStartComponent } from './recipes-component/recipe-start/recipe-start.component';
 import { RecipeDetailsComponent } from './recipes-component/recipe-details/recipe-details.component';
 import { RecipeEditComponent } from './recipes-component/recipe-edit/recipe-edit.component';
 import { RecipesResolverService } from './recipes-component/recipes-resolver.server';
-import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -14,7 +12,6 @@ const routes: Routes = [
     path: 'recipes',
     component: RecipesComponentComponent,
     children: [
-      { path: '', component: RecipeStartComponent },
       { path: 'new', component: RecipeEditComponent },
       {
         path: ':id',
@@ -32,7 +29,6 @@ const routes: Routes = [
     path: 'shopping-list',
     component: ShoppinglistComponentComponent,
   },
-  { path: 'auth', component: AuthComponent },
 ];
 
 @NgModule({

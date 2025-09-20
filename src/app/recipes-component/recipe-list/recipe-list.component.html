@@ -3,13 +3,28 @@
     <button class="btn btn-primary" (click)="onNewRecipe()">Add New Recipe</button>
   </div>
 </div>
-<hr>
-<div class="row ">
+
+<!-- Instructions for getting started -->
+<div class="row" *ngIf="recipes.length === 0">
   <div class="col-xs-12">
+    <div class="alert alert-info mt-3" role="alert">
+      <h5 class="alert-heading">
+        <i class="fas fa-info-circle"></i> Get Started
+      </h5>
+      <p class="mb-0">
+        <strong>Please select or add a recipe to get started!</strong><br>
+        Click the "Add New Recipe" button above to create your first recipe, or select an existing recipe from the list below.
+      </p>
+    </div>
+  </div>
+</div>
 
-    <app-recipe-item *ngFor="let recipeEl of recipes;
-    let i = index" [recipe]="recipeEl" [index]="i"></app-recipe-item>
-
-
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-recipe-item *ngFor="let recipeEl of recipes; let i = index"
+                     [recipe]="recipeEl"
+                     [index]="i">
+    </app-recipe-item>
   </div>
 </div>

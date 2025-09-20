@@ -14,14 +14,12 @@ import { RecipeItemComponent } from './recipes-component/recipe-list/recipe-item
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { ShoppingListService } from './shoppinglist-component/shoppinglist.service';
-import { RecipeStartComponent } from './recipes-component/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes-component/recipe-edit/recipe-edit.component';
 import { RecipeServices } from './recipes-component/recipe.service';
 import { LinebreakPipe } from './linebreak.pipe';
 import { HtmlPipe } from './html.pipe';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthComponent } from './auth/auth.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -35,12 +33,9 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     RecipeItemComponent,
     ShoppingEditComponent,
     DropdownDirective,
-    RecipeStartComponent,
     RecipeEditComponent,
     LinebreakPipe,
     HtmlPipe,
-    AuthComponent,
-    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +44,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgOptimizedImage,
   ],
   providers: [ShoppingListService, RecipeServices],
   bootstrap: [AppComponent],

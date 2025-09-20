@@ -34,13 +34,30 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onSubmit(form: NgForm) {
     const value = form.value;
     const newIngredient = new Ingredient(value.name, value.amount, value.uom);
+
     if (this.editMode) {
-      this.slService.updateIngredient(this.editedItemIndex, newIngredient);
+      this.slService.updateIngredient(this.editedItemIndex, newIngredient).subscribe({
+        next: () => {
+          this.editMode = false;
+          form.reset();
+        },
+        error: (error) => {
+          console.error('Failed to update ingredient:', error);
+          // You could add user notification here
+        }
+      });
     } else {
-      this.slService.addIngredient(newIngredient);
+      this.slService.addIngredient(newIngredient).subscribe({
+        next: () => {
+          this.editMode = false;
+          form.reset();
+        },
+        error: (error) => {
+          console.error('Failed to add ingredient:', error);
+          // You could add user notification here
+        }
+      });
     }
-    this.editMode = false;
-    form.reset();
   }
   onClear() {
     this.slForm.reset();
@@ -48,12 +65,27 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.slService.deleteIngredient(this.editedItemIndex);
-    this.onClear();
+    this.slService.deleteIngredient(this.editedItemIndex).subscribe({
+      next: () => {
+        this.onClear();
+      },
+      error: (error) => {
+        console.error('Failed to delete ingredient:', error);
+        // You could add user notification here
+      }
+    });
   }
+
   onDeleteAll() {
-    this.slService.deleteAll();
-    this.onClear();
+    this.slService.deleteAll().subscribe({
+      next: () => {
+        this.onClear();
+      },
+      error: (error) => {
+        console.error('Failed to clear shopping list:', error);
+        // You could add user notification here
+      }
+    });
   }
 
   ngOnDestroy(): void {

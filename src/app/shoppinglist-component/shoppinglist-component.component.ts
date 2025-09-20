@@ -26,6 +26,25 @@ export class ShoppinglistComponentComponent implements OnInit, OnDestroy {
     this.slService.startedEditing.next(index);
   }
 
+  /**
+   * Print the shopping list
+   */
+  onPrint() {
+    window.print();
+  }
+
+  /**
+   * Get current date for print header
+   */
+  getCurrentDate(): string {
+    return new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
   ngOnDestroy(): void {
     this.idChangeSub.unsubscribe();
   }
