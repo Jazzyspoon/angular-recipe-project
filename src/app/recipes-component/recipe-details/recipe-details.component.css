@@ -41,19 +41,83 @@
 }
 
 @media print {
-  /* Hide screen elements */
+  /* Hide all screen-only elements */
   .step-item,
   .badge,
   .btn,
   .dropdown,
   nav,
-  .navbar {
+  .navbar,
+  header,
+  footer {
     display: none !important;
   }
+
+
 
   /* Show print-only elements */
   .print-only {
     display: block !important;
+  }
+
+  /* Print-friendly recipe header */
+  .print-recipe-header {
+    text-align: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
+
+  .print-recipe-title {
+    font-size: 24pt;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .print-recipe-description {
+    font-size: 14pt;
+    font-style: italic;
+    color: #666;
+  }
+
+  /* Print-friendly ingredients section */
+  .print-ingredients {
+    margin-bottom: 25px;
+    page-break-inside: avoid;
+  }
+
+  .print-ingredients h4 {
+    font-size: 16pt;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+
+  .print-ingredients ul {
+    list-style-type: none;
+    padding-left: 0;
+    columns: 2;
+    column-gap: 30px;
+  }
+
+  .print-ingredients li {
+    margin-bottom: 6px;
+    break-inside: avoid;
+    font-size: 11pt;
+  }
+
+  /* Print-friendly instructions section */
+  .print-instructions {
+    margin-bottom: 20px;
+  }
+
+  .print-instructions h4 {
+    font-size: 16pt;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
   }
 
   .recipe-steps-print {
@@ -65,10 +129,22 @@
     margin-bottom: 12px;
     line-height: 1.6;
     page-break-inside: avoid;
+    font-size: 11pt;
   }
 
   .step-meta-print {
     font-style: italic;
+    color: #666;
+    font-size: 10pt;
+  }
+
+  /* Print footer */
+  .print-recipe-footer {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    text-align: center;
+    font-size: 10pt;
     color: #666;
   }
 
@@ -76,6 +152,8 @@
   body {
     font-size: 12pt;
     line-height: 1.4;
+    margin: 0 !important;
+    padding: 15px !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -85,6 +163,22 @@
   .container {
     width: 100% !important;
     max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .row {
+    margin: 0 !important;
+  }
+
+  /* Hide recipe image for print to save space */
+  img {
+    display: none !important;
+  }
+
+  /* Ensure proper page breaks */
+  .print-section {
+    page-break-inside: avoid;
   }
 }
 

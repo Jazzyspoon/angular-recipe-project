@@ -1,27 +1,110 @@
+/* Shopping List Container */
+.shopping-list-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
 /* Shopping List Header */
 .shopping-list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #007bff;
+  margin-bottom: 25px;
+  padding: 15px;
+  border-bottom: 3px solid transparent;
+  background: linear-gradient(90deg, #007bff, #28a745) padding-box,
+              linear-gradient(90deg, #007bff, #28a745) border-box;
+  border-image: linear-gradient(90deg, #007bff, #28a745) 1;
+  position: relative;
+}
+
+.shopping-list-header::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #007bff, #28a745);
+  border-radius: 2px;
 }
 
 .shopping-list-header h2 {
   margin: 0;
-  color: #333;
-  font-weight: 600;
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
+/* Enhanced Print Button */
 .btn-sm {
-  padding: 5px 12px;
+  padding: 8px 16px;
   font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-sm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Shopping List Items */
+.list-group-item {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.list-group-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #007bff, #28a745);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.list-group-item:hover {
+  transform: translateX(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-color: #007bff;
+  background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+}
+
+.list-group-item:hover::before {
+  opacity: 1;
+}
+
+/* Shopping List Text */
+.list-group-item {
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+
+.list-group-item:hover {
+  color: #1565c0;
 }
 
 /* Print-only styles */

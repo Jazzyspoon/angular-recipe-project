@@ -69,4 +69,16 @@ export class RecipeDetailsComponent implements OnInit {
   onPrintRecipe(): void {
     window.print();
   }
+
+  /**
+   * Get current date for print header
+   */
+  getCurrentDate(): string {
+    return new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
 }

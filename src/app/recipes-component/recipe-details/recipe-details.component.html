@@ -63,16 +63,45 @@
       </div>
     </div>
 
-    <!-- Print-friendly version (hidden by default) -->
+    <!-- Print-friendly complete recipe layout (hidden by default) -->
     <div class="print-only">
-      <ol class="recipe-steps-print">
-        <li *ngFor="let step of getRecipeSteps()">
-          {{ step.instruction }}
-          <span *ngIf="step.estimatedTime || step.temperature" class="step-meta-print">
-            ({{ step.estimatedTime }}{{ step.estimatedTime && step.temperature ? ', ' : '' }}{{ step.temperature }})
-          </span>
-        </li>
-      </ol>
+      <!-- Print Recipe Header -->
+      <div class="print-recipe-header print-section">
+        <div class="print-recipe-title">{{ recipe.name }}</div>
+        <div class="print-recipe-description">{{ recipe.description }}</div>
+        <div style="margin-top: 10px; font-size: 10pt;">
+          Printed on {{ getCurrentDate() }}
+        </div>
+      </div>
+
+      <!-- Print Ingredients Section -->
+      <div class="print-ingredients print-section">
+        <h4>Ingredients</h4>
+        <ul>
+          <li *ngFor="let ingredient of recipe.ingredients">
+            <strong>{{ ingredient.amount }} {{ ingredient.uom }}</strong> {{ ingredient.name }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Print Instructions Section -->
+      <div class="print-instructions print-section">
+        <h4>Instructions</h4>
+        <ol class="recipe-steps-print">
+          <li *ngFor="let step of getRecipeSteps()">
+            {{ step.instruction }}
+            <span *ngIf="step.estimatedTime || step.temperature" class="step-meta-print">
+              <br>({{ step.estimatedTime }}{{ step.estimatedTime && step.temperature ? ', ' : '' }}{{ step.temperature }})
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Print Recipe Footer -->
+      <div class="print-recipe-footer">
+        <div>From the Pottorff Family Recipe Book</div>
+        <div>Enjoy your cooking!</div>
+      </div>
     </div>
   </div>
 </div>

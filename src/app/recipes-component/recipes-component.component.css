@@ -1,0 +1,30 @@
+/* Print styles to hide recipe list when printing individual recipes */
+@media print {
+  /* Hide the recipe list column completely when printing */
+  .col-md-5 {
+    display: none !important;
+  }
+
+  /* Make recipe details take full width when printing */
+  .col-md-7 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure the row takes full width */
+  .row {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Hide any other navigation or UI elements */
+  nav,
+  .navbar,
+  header,
+  footer {
+    display: none !important;
+  }
+}

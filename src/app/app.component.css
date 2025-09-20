@@ -1,0 +1,27 @@
+/* Global print styles */
+@media print {
+  /* Hide header and footer components when printing */
+  app-header-component,
+  app-footer-component {
+    display: none !important;
+  }
+
+  /* Ensure container takes full width and has no margins */
+  .container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 15px !important;
+  }
+
+  /* Remove any extra spacing from rows */
+  .row {
+    margin: 0 !important;
+  }
+
+  /* Ensure body has proper print margins */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
