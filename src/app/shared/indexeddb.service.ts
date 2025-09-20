@@ -16,7 +16,7 @@ export interface IngredientWithId extends Ingredient {
 })
 export class IndexedDBService {
   private dbName = 'RecipeBookDB';
-  private dbVersion = 1;
+  private dbVersion = 2;
   private db: IDBDatabase | null = null;
   private dbReady = new BehaviorSubject<boolean>(false);
 
@@ -88,6 +88,41 @@ export class IndexedDBService {
    */
   private generateId(): string {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  }
+
+  /**
+   * Reset database (for debugging purposes)
+   */
+  resetDatabase(): Observable<boolean> {
+    return new Observable(observer => {
+      if (this.db) {
+        this.db.close();
+      }
+
+      const deleteRequest = indexedDB.deleteDatabase(this.dbName);
+
+      deleteRequest.onsuccess = () => {
+        console.log('Database deleted successfully');
+        this.db = null;
+        this.dbReady.next(false);
+
+        // Reinitialize the database
+        this.initDB();
+
+        // Wait for the new database to be ready
+        this.waitForDB().subscribe(ready => {
+          if (ready) {
+            observer.next(true);
+            observer.complete();
+          }
+        });
+      };
+
+      deleteRequest.onerror = (event) => {
+        console.error('Error deleting database:', event);
+        observer.error(event);
+      };
+    });
   }
 
   /**

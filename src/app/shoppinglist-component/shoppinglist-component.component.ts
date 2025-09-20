@@ -34,6 +34,25 @@ export class ShoppinglistComponentComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Reset database (temporary debugging method)
+   */
+  onResetDatabase(): void {
+    console.log('Resetting database...');
+    this.slService.resetDatabase().subscribe({
+      next: (success) => {
+        if (success) {
+          console.log('Database reset successfully');
+          // Reload the page to reinitialize everything
+          window.location.reload();
+        }
+      },
+      error: (error) => {
+        console.error('Failed to reset database:', error);
+      }
+    });
+  }
+
+  /**
    * Get current date for print header
    */
   getCurrentDate(): string {

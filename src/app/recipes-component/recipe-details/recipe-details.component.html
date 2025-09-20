@@ -107,10 +107,50 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
-        {{ingredient.name}} - ({{ingredient.amount}} {{ingredient.uom}})
-      </li>
-    </ul>
+    <h4 style="text-decoration: underline; margin-bottom: 15px;">Ingredients:</h4>
+    <div class="ingredients-container">
+      <div class="ingredient-item" *ngFor="let ingredient of recipe.ingredients; let i = index">
+        <div class="ingredient-content">
+          <div class="ingredient-info">
+            <strong>{{ingredient.amount}} {{ingredient.uom}}</strong> {{ingredient.name}}
+          </div>
+          <div class="ingredient-actions">
+            <button
+              class="btn btn-sm btn-outline-success"
+              (click)="onAddIngredientToShoppingList(ingredient, i)"
+              [id]="'ingredient-btn-' + i"
+              title="Add to shopping list">
+              <i class="fas fa-cart-plus"></i>
+              <span class="d-none d-sm-inline ms-1">Add</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add all ingredients button -->
+    <div class="mt-3">
+      <button
+        class="btn btn-success"
+        (click)="onAddAllIngredientsToShoppingList()"
+        title="Add all ingredients to shopping list">
+        <i class="fas fa-cart-plus me-2"></i>
+        Add All Ingredients to Shopping List
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notifications -->
+<div class="toast-container">
+  <div class="toast" [class.show]="showToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <i class="fas fa-check-circle me-2"></i>
+      <strong class="me-auto">Added to Shopping List</strong>
+      <button type="button" class="btn-close btn-close-white" (click)="hideToast()" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      {{ toastMessage }}
+    </div>
   </div>
 </div>

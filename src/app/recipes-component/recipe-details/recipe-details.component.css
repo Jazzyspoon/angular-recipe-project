@@ -182,6 +182,151 @@
   }
 }
 
+/* Ingredients Selection Styling */
+.ingredients-container {
+  margin-bottom: 20px;
+}
+
+.ingredient-item {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ingredient-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #28a745, #20c997);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ingredient-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-color: #28a745;
+}
+
+.ingredient-item:hover::before {
+  opacity: 1;
+}
+
+.ingredient-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ingredient-info {
+  flex: 1;
+  font-size: 1.05rem;
+  color: #2c3e50;
+}
+
+.ingredient-info strong {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.ingredient-actions {
+  margin-left: 15px;
+}
+
+.btn-outline-success {
+  border: 2px solid #28a745;
+  color: #28a745;
+  background: transparent;
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-success:hover {
+  background: #28a745;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.btn-outline-success i {
+  font-size: 14px;
+}
+
+/* Add all ingredients button */
+.btn-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.btn-success i {
+  margin-right: 8px;
+}
+
+/* Success feedback animation */
+@keyframes addedToCart {
+  0% { transform: scale(1); background-color: #28a745; }
+  50% { transform: scale(1.1); background-color: #20c997; }
+  100% { transform: scale(1); background-color: #28a745; }
+}
+
+.btn-added {
+  animation: addedToCart 0.6s ease-in-out;
+  background-color: #20c997 !important;
+  border-color: #20c997 !important;
+}
+
+.btn-added i::before {
+  content: "\f00c" !important; /* checkmark icon */
+}
+
+/* Toast notification styles */
+.toast-container {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1050;
+}
+
+.toast {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  min-width: 300px;
+}
+
+.toast-header {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toast-body {
+  font-weight: 500;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .step-number .badge {
@@ -196,5 +341,59 @@
 
   .step-item {
     padding: 10px;
+  }
+
+  .ingredient-content {
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    justify-content: space-between;
+  }
+
+  .ingredient-actions {
+    margin-left: 0;
+    flex-shrink: 0;
+  }
+
+  .ingredient-info {
+    font-size: 0.95rem;
+    flex: 1;
+  }
+
+  /* Make buttons more prominent on mobile */
+  .btn-outline-success {
+    padding: 8px 16px;
+    font-size: 14px;
+    min-width: 80px;
+    border-width: 2px;
+  }
+
+  .btn-outline-success i {
+    font-size: 16px;
+  }
+
+  .btn-success {
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px 24px;
+    font-size: 16px;
+  }
+
+  /* Toast adjustments for mobile */
+  .toast-container {
+    top: 70px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .toast {
+    min-width: auto;
+    width: 100%;
+  }
+
+  /* Ingredient items more touch-friendly */
+  .ingredient-item {
+    padding: 20px 15px;
+    margin-bottom: 12px;
   }
 }

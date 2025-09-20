@@ -16,56 +16,31 @@ export class ShoppingListService {
   }
 
   /**
+   * Reset the database (for debugging)
+   */
+  resetDatabase(): Observable<boolean> {
+    return this.indexedDBService.resetDatabase();
+  }
+
+  /**
    * Load ingredients from IndexedDB
    */
   private loadIngredientsFromDB(): void {
     this.indexedDBService.getAllShoppingListIngredients().subscribe({
       next: (ingredients) => {
-        if (ingredients.length === 0) {
-          // If no ingredients in DB, add some default ones
-          this.initializeDefaultIngredients();
-        } else {
-          this.ingredients = ingredients;
-          this.ingredientsChanged.next(this.ingredients.slice());
-        }
+        this.ingredients = ingredients;
+        this.ingredientsChanged.next(this.ingredients.slice());
       },
       error: (error) => {
         console.error('Failed to load ingredients from IndexedDB:', error);
-        this.initializeDefaultIngredients();
+        // Start with empty list on error
+        this.ingredients = [];
+        this.ingredientsChanged.next(this.ingredients.slice());
       }
     });
   }
 
-  /**
-   * Initialize with default ingredients (first time use)
-   */
-  private initializeDefaultIngredients(): void {
-    const defaultIngredients = [
-      new Ingredient('Apples', 5, 'each'),
-      new Ingredient('Tomatoes', 10, 'each'),
-      new Ingredient('Flour', 1, 'cup'),
-      new Ingredient('Sugar', 1, 'cup'),
-      new Ingredient('Salt', 1, 'teaspoon'),
-      new Ingredient('Pepper', 1, 'teaspoon'),
-    ];
 
-    // Add each default ingredient to IndexedDB
-    let completed = 0;
-    defaultIngredients.forEach(ingredient => {
-      this.indexedDBService.addShoppingListIngredient(ingredient).subscribe({
-        next: (savedIngredient) => {
-          this.ingredients.push(savedIngredient);
-          completed++;
-          if (completed === defaultIngredients.length) {
-            this.ingredientsChanged.next(this.ingredients.slice());
-          }
-        },
-        error: (error) => {
-          console.error('Failed to add default ingredient:', error);
-        }
-      });
-    });
-  }
 
   /**
    * Get all ingredients

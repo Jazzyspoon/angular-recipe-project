@@ -10,6 +10,8 @@ import { RecipeServices } from '../recipe.service';
 export class RecipeDetailsComponent implements OnInit {
   recipe: Recipe;
   id: string;
+  showToast = false;
+  toastMessage = '';
 
   constructor(
     private recipeService: RecipeServices,
@@ -30,14 +32,44 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   onAddToShoppingList() {
+    this.onAddAllIngredientsToShoppingList();
+  }
+
+  /**
+   * Add all ingredients to shopping list
+   */
+  onAddAllIngredientsToShoppingList() {
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients).subscribe({
       next: () => {
-        // You could add a success notification here
-        console.log('Ingredients added to shopping list successfully');
+        console.log('All ingredients added to shopping list successfully');
+        this.showToastNotification(`All ${this.recipe.ingredients.length} ingredients added to shopping list!`);
       },
       error: (error) => {
         console.error('Failed to add ingredients to shopping list:', error);
-        // You could add user notification here
+        this.showToastNotification('Failed to add ingredients. Please try again.', true);
+      }
+    });
+  }
+
+  /**
+   * Add a single ingredient to shopping list
+   */
+  onAddIngredientToShoppingList(ingredient: any, index?: number) {
+    this.recipeService.addIngredientsToShoppingList([ingredient]).subscribe({
+      next: () => {
+        console.log(`${ingredient.name} added to shopping list successfully`);
+
+        // Show toast notification
+        this.showToastNotification(`${ingredient.name} added to shopping list!`);
+
+        // Add visual feedback to button
+        if (index !== undefined) {
+          this.animateButton(`ingredient-btn-${index}`);
+        }
+      },
+      error: (error) => {
+        console.error('Failed to add ingredient to shopping list:', error);
+        this.showToastNotification('Failed to add ingredient. Please try again.', true);
       }
     });
   }
@@ -80,5 +112,40 @@ export class RecipeDetailsComponent implements OnInit {
       month: 'long',
       day: 'numeric'
     });
+  }
+
+  /**
+   * Show toast notification
+   */
+  showToastNotification(message: string, isError: boolean = false): void {
+    this.toastMessage = message;
+    this.showToast = true;
+
+    // Auto-hide toast after 3 seconds
+    setTimeout(() => {
+      this.hideToast();
+    }, 3000);
+  }
+
+  /**
+   * Hide toast notification
+   */
+  hideToast(): void {
+    this.showToast = false;
+  }
+
+  /**
+   * Animate button to show feedback
+   */
+  animateButton(buttonId: string): void {
+    const button = document.getElementById(buttonId);
+    if (button) {
+      button.classList.add('btn-added');
+
+      // Remove animation class after animation completes
+      setTimeout(() => {
+        button.classList.remove('btn-added');
+      }, 600);
+    }
   }
 }
