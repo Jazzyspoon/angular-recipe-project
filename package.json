@@ -6,6 +6,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
+    "deploy": "ng build --configuration production --base-href /angular-recipe-project/ && npx angular-cli-ghpages --dir=dist/angular-recipe-project",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -46,6 +48,7 @@
     "@angular/compiler-cli": "^14.3.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^2.0.3",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
