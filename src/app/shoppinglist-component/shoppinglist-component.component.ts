@@ -37,17 +37,29 @@ export class ShoppinglistComponentComponent implements OnInit, OnDestroy {
    * Reset database (temporary debugging method)
    */
   onResetDatabase(): void {
+    // Show confirmation dialog
+    const confirmed = confirm(
+      '⚠️ WARNING: This will permanently delete ALL your recipes and shopping list items!\n\n' +
+      'This action cannot be undone. Are you sure you want to reset the database?'
+    );
+
+    if (!confirmed) {
+      return; // User cancelled
+    }
+
     console.log('Resetting database...');
     this.slService.resetDatabase().subscribe({
       next: (success) => {
         if (success) {
           console.log('Database reset successfully');
+          alert('✅ Database has been reset successfully. The page will now reload.');
           // Reload the page to reinitialize everything
           window.location.reload();
         }
       },
       error: (error) => {
         console.error('Failed to reset database:', error);
+        alert('❌ Failed to reset database. Please check the console for details.');
       }
     });
   }
