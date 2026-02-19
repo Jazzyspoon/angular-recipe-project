@@ -192,7 +192,7 @@
   border: 1px solid #e9ecef;
   border-radius: 12px;
   margin-bottom: 10px;
-  padding: 15px;
+  padding: 0 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -393,7 +393,7 @@
 
   /* Ingredient items more touch-friendly */
   .ingredient-item {
-    padding: 20px 15px;
+    padding: 5px 15px;
     margin-bottom: 12px;
   }
 }

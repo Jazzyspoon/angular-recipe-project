@@ -43,13 +43,13 @@ export class Recipe {
     // Convert instructions string to steps array
     if (this.instructions) {
       const instructionLines = this.instructions
-        .split(/\n|\.(?=\s[A-Z])|(?:\d+\.?\s)/) // Split on newlines, periods followed by capital letters, or numbered steps
+        .split(/\s*\n\s*|(?<=[.!?])\s+(?=[A-Z])|(?<=\s|^)\d+[\.)]\s+/) // Split on newlines, sentences (punctuation + space + capital), or numbered steps at the beginning/after space
         .filter(line => line.trim().length > 0)
         .map(line => line.trim());
 
       return instructionLines.map((instruction, index) => ({
         stepNumber: index + 1,
-        instruction: instruction.replace(/^\d+\.?\s*/, '') // Remove leading numbers
+        instruction: instruction
       }));
     }
 
