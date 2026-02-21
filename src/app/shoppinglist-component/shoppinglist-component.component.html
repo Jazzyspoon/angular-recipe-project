@@ -1,42 +1,56 @@
-<div class="row">
-  <div class="col-xs-10">
-    <div class="shopping-list-header no-print">
-      <h2>Shopping List</h2>
-      <div class="header-actions">
-        <button class="btn btn-primary btn-sm" (click)="onPrint()">
-          <i class="fas fa-print"></i> Print Shopping List
-        </button>
-        <button class="btn btn-danger btn-sm" (click)="onResetDatabase()" title="⚠️ WARNING: This will delete ALL data permanently!">
-          <i class="fas fa-exclamation-triangle"></i> Reset DB
-        </button>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4 no-print">
+      <div class="card-header bg-white border-0 pt-4 px-4 pb-2">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 class="m-0">Shopping List</h2>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary btn-sm rounded-pill" (click)="onPrint()">
+              <i class="fas fa-print"></i>
+            </button>
+            <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="onResetDatabase()" title="Reset DB">
+              <i class="fas fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <app-shopping-edit class="no-print"></app-shopping-edit>
-
-    <hr class="no-print">
-    <p class="no-print">Click item to edit:</p>
-
-    <!-- Print-friendly shopping list -->
-    <div class="print-only print-shopping-list">
-      <h1>Shopping List</h1>
-      <div class="print-date">{{ getCurrentDate() }}</div>
-      <div class="print-ingredients">
-        <div class="ingredient-item" *ngFor="let ingredient of ingredients; let i=index">
-          <div class="checkbox">☐</div>
-          <div class="ingredient-details">
-            <span class="ingredient-name">{{ ingredient.name }}</span>
-            <span class="ingredient-amount">{{ ingredient.amount }} {{ ingredient.uom }}</span>
+      <div class="card-body px-4">
+        <div class="no-print">
+          <app-shopping-edit></app-shopping-edit>
+          <hr class="my-4">
+          <h5 class="text-muted mb-3"><i class="fas fa-list-ul me-2"></i> Your Items</h5>
+          <div class="list-group list-group-flush border-top">
+            <button
+              type="button"
+              class="list-group-item list-group-item-action border-bottom d-flex justify-content-between align-items-center py-3 px-0"
+              *ngFor="let ingredient of ingredients; let i=index"
+              (click)="onEditItem(i)">
+              <span class="fw-medium text-uppercase small letter-spacing-1">{{ ingredient.name }}</span>
+              <span class="badge bg-light text-dark rounded-pill px-3">{{ ingredient.amount }} {{ ingredient.uom }}</span>
+            </button>
+          </div>
+          <div *ngIf="ingredients.length === 0" class="text-center py-5 opacity-50">
+            <i class="fas fa-shopping-basket fa-3x mb-3"></i>
+            <p>Your shopping list is empty</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Screen display -->
-    <ul class="list-group no-print">
-      <a class="list-group-item" style="cursor: pointer;" *ngFor="let ingredient of ingredients; let i=index"
-        (click)="onEditItem(i)">
-        {{ingredient.name | uppercase}} ({{ ingredient.amount}} {{ingredient.uom}})</a>
-    </ul>
+    <!-- Print-friendly shopping list -->
+    <div class="print-only print-shopping-list mt-4">
+      <h1 class="border-bottom pb-2">Shopping List</h1>
+      <div class="text-muted mb-4">Date: {{ getCurrentDate() }}</div>
+      <div class="print-ingredients">
+        <div class="d-flex align-items-center mb-3 pb-2 border-bottom border-light" *ngFor="let ingredient of ingredients">
+          <div class="me-3 fs-3">☐</div>
+          <div class="flex-grow-1">
+            <span class="fw-bold text-uppercase">{{ ingredient.name }}</span>
+            <span class="ms-2 text-muted">({{ ingredient.amount }} {{ ingredient.uom }})</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

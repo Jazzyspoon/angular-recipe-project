@@ -157,3 +157,30 @@
     font-size: 1.2rem;
   }
 }
+
+.recipe-list-container {
+  height: calc(100vh - 150px);
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-scroll-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.recipe-scroll-area::-webkit-scrollbar {
+  width: 4px;
+}
+
+.recipe-scroll-area::-webkit-scrollbar-thumb {
+  background: #eee;
+  border-radius: 10px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}

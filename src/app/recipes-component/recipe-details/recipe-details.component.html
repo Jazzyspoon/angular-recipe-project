@@ -1,156 +1,138 @@
-<div class="row">
-  <div class="col-xs-12">
-    <img [src]="recipe.imagePath" class="img-fluid" alt="{{recipe.name}}"
-      style="height: 300px; width: 300px; padding-top: 10px;">
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <h1>{{recipe.name}}</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    "{{recipe.description}}"
-  </div>
-</div>
-<div class="row" style="margin-left: -50px;">
-  <div class="col-xs-12">
-    <div class="btn-group">
-      <ul ngbDropdown class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" ngbDropdownToggle id="dropdownMenuButton1"
-          aria-expanded="false">
-          Edit This Recipe
-        </button>
-        <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
-          <li><a ngbDropdownItem style="cursor: pointer" (click)="onAddToShoppingList()">Add Ingredients to shopping
-              list</a>
-          </li>
-          <li><a ngbDropdownItem (click)="onEditRecipe()">Edit recipe</a></li>
-          <li><a ngbDropdownItem style="cursor: pointer" (click)="onPrintRecipe()">Print recipe</a></li>
-          <li><a ngbDropdownItem (click)="onDeleteRecipe()">Delete recipe</a></li>
-        </ul>
-      </ul>
-    </div>
-
-  </div>
-</div>
-<div class="row" style="padding-bottom: 10px;">
-  <div class="col-xs-12">
-    <h4 style="text-decoration: underline; margin-bottom: 15px;">Preparation and Cooking Instructions:</h4>
-
-    <!-- Display as numbered steps -->
-    <div class="recipe-steps">
-      <div *ngFor="let step of getRecipeSteps(); let i = index" class="step-item mb-3">
-        <div class="d-flex">
-          <div class="step-number">
-            <span class="badge bg-primary rounded-circle me-3">{{ step.stepNumber }}</span>
-          </div>
-          <div class="step-content flex-grow-1">
-            <p class="mb-1">{{ step.instruction }}</p>
-            <div *ngIf="step.estimatedTime || step.temperature" class="step-meta">
-              <small class="text-muted">
-                <span *ngIf="step.estimatedTime" class="me-3">
-                  <i class="fas fa-clock"></i> {{ step.estimatedTime }}
-                </span>
-                <span *ngIf="step.temperature">
-                  <i class="fas fa-thermometer-half"></i> {{ step.temperature }}
-                </span>
-              </small>
-            </div>
-          </div>
-        </div>
+<div class="recipe-detail-container px-lg-4">
+  <!-- Recipe Hero Section -->
+  <div class="row mb-5 no-print">
+    <div class="col-md-5">
+      <div class="detail-image-wrapper shadow-lg">
+        <img [src]="recipe.imagePath" class="img-fluid w-100" [alt]="recipe.name">
       </div>
     </div>
+    <div class="col-md-7 d-flex flex-column justify-content-center mt-4 mt-md-0">
+      <h1 class="display-4 recipe-title">{{ recipe.name }}</h1>
+      <p class="lead text-muted fst-italic mb-4">"{{ recipe.description }}"</p>
 
-    <!-- Print-friendly complete recipe layout (hidden by default) -->
-    <div class="print-only">
-      <!-- Print Recipe Header -->
-      <div class="print-recipe-header print-section">
-<!--        <div class="print-recipe-title">{{ recipe.name }}</div>-->
-<!--        <div class="print-recipe-description">{{ recipe.description }}</div>-->
-        <div style="margin-top: 10px; font-size: 10pt;">
-          Printed on {{ getCurrentDate() }}
-        </div>
-      </div>
-
-      <!-- Print Ingredients Section -->
-      <div class="print-ingredients print-section">
-        <h4>Ingredients</h4>
-        <ul>
-          <li *ngFor="let ingredient of recipe.ingredients">
-            <strong>{{ ingredient.amount }} {{ ingredient.uom }}</strong> {{ ingredient.name }}
-          </li>
-        </ul>
-      </div>
-
-      <!-- Print Instructions Section -->
-      <div class="print-instructions print-section">
-        <h4>Instructions</h4>
-        <ol class="recipe-steps-print">
-          <li *ngFor="let step of getRecipeSteps()">
-            {{ step.instruction }}
-            <span *ngIf="step.estimatedTime || step.temperature" class="step-meta-print">
-              <br>({{ step.estimatedTime }}{{ step.estimatedTime && step.temperature ? ', ' : '' }}{{ step.temperature }})
-            </span>
-          </li>
-        </ol>
-      </div>
-
-      <!-- Print Recipe Footer -->
-      <div class="print-recipe-footer">
-        <div>From the Pottorff Family Recipe Book</div>
-        <div>Enjoy your cooking!</div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <h4 style="text-decoration: underline; margin-bottom: 15px;">Ingredients:</h4>
-    <div class="ingredients-container">
-      <div class="ingredient-item" *ngFor="let ingredient of recipe.ingredients; let i = index">
-        <div class="ingredient-content">
-          <div class="ingredient-info">
-            <strong>{{ingredient.amount}} {{ingredient.uom}}</strong> {{ingredient.name}}
-          </div>
-          <div class="ingredient-actions">
-            <button
-              class="btn btn-sm btn-outline-success"
-              (click)="onAddIngredientToShoppingList(ingredient, i)"
-              [id]="'ingredient-btn-' + i"
-              title="Add to shopping list">
-              <i class="fas fa-cart-plus"></i>
-              <span class="d-none d-sm-inline ms-1">Add</span>
+      <div class="d-flex flex-wrap gap-2">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-primary rounded-pill px-4" id="recipeActions" ngbDropdownToggle>
+            <i class="fas fa-cog me-2"></i> Manage Recipe
+          </button>
+          <div ngbDropdownMenu aria-labelledby="recipeActions">
+            <button ngbDropdownItem (click)="onAddToShoppingList()">
+              <i class="fas fa-list-check me-2"></i> All to Shopping List
+            </button>
+            <button ngbDropdownItem (click)="onEditRecipe()">
+              <i class="fas fa-edit me-2"></i> Edit Recipe
+            </button>
+            <button ngbDropdownItem (click)="onPrintRecipe()">
+              <i class="fas fa-print me-2"></i> Print Recipe
+            </button>
+            <div class="dropdown-divider"></div>
+            <button ngbDropdownItem (click)="onDeleteRecipe()" class="text-danger">
+              <i class="fas fa-trash-alt me-2"></i> Delete Recipe
             </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Add all ingredients button -->
-    <div class="mt-3">
-      <button
-        class="btn btn-success"
-        (click)="onAddAllIngredientsToShoppingList()"
-        title="Add all ingredients to shopping list">
-        <i class="fas fa-cart-plus me-2"></i>
-        Add All Ingredients to Shopping List
-      </button>
+  <div class="row no-print">
+    <!-- Ingredients Column -->
+    <div class="col-lg-4 mb-5">
+      <div class="card border-0 bg-light rounded-4 shadow-sm h-100">
+        <div class="card-body p-4">
+          <h4 class="mb-4 d-flex align-items-center">
+            <i class="fas fa-basket-shopping text-accent me-2"></i> Ingredients
+          </h4>
+          <ul class="list-unstyled ingredient-list">
+            <li *ngFor="let ingredient of recipe.ingredients; let i = index" class="mb-3 d-flex justify-content-between align-items-start pb-2 border-bottom border-light">
+              <div>
+                <span class="fw-bold">{{ ingredient.amount }} {{ ingredient.uom }}</span>
+                <span class="ms-1">{{ ingredient.name }}</span>
+              </div>
+              <button
+                class="btn btn-link p-0 text-success border-0 shadow-none hover-scale"
+                (click)="onAddIngredientToShoppingList(ingredient, i)"
+                title="Add to shopping list">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </li>
+          </ul>
+          <button class="btn btn-outline-success w-100 mt-3 btn-sm" (click)="onAddAllIngredientsToShoppingList()">
+            Add All to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions Column -->
+    <div class="col-lg-8 mb-5">
+      <div class="card border-0 shadow-sm rounded-4 h-100">
+        <div class="card-body p-4">
+          <h4 class="mb-4 d-flex align-items-center">
+            <i class="fas fa-fire-burner text-accent me-2"></i> Instructions
+          </h4>
+          <div class="instruction-steps">
+            <div *ngFor="let step of getRecipeSteps(); let i = index" class="step-card mb-4">
+              <div class="d-flex">
+                <div class="step-num-container me-3">
+                  <span class="step-num">{{ i + 1 }}</span>
+                </div>
+                <div class="flex-grow-1">
+                  <p class="mb-2 fs-5 instruction-text">{{ step.instruction }}</p>
+                  <div *ngIf="step.estimatedTime || step.temperature" class="d-flex gap-3">
+                    <span *ngIf="step.estimatedTime" class="badge bg-light text-dark fw-normal">
+                      <i class="fas fa-clock text-accent me-1"></i> {{ step.estimatedTime }}
+                    </span>
+                    <span *ngIf="step.temperature" class="badge bg-light text-dark fw-normal">
+                      <i class="fas fa-temperature-half text-accent me-1"></i> {{ step.temperature }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Print-only view stays at the end -->
+  <div class="print-only">
+    <div class="print-recipe-header print-section">
+      <h2 class="mb-0">{{ recipe.name }}</h2>
+      <div class="text-muted small">Printed on {{ getCurrentDate() }}</div>
+    </div>
+    <div class="row">
+      <div class="col-12 mt-4">
+        <h4>Ingredients</h4>
+        <ul class="list-unstyled">
+          <li *ngFor="let ingredient of recipe.ingredients" class="mb-1 pb-1 border-bottom border-light">
+            <strong>{{ ingredient.amount }} {{ ingredient.uom }}</strong> {{ ingredient.name }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 mt-4">
+        <h4>Instructions</h4>
+        <div *ngFor="let step of getRecipeSteps(); let i = index" class="mb-3">
+          <strong>Step {{ i + 1 }}:</strong> {{ step.instruction }}
+          <span *ngIf="step.estimatedTime || step.temperature" class="text-muted ms-2 small">
+            ({{ step.estimatedTime }} {{ step.temperature }})
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- Toast Notifications -->
-<div class="toast-container">
-  <div class="toast" [class.show]="showToast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <i class="fas fa-check-circle me-2"></i>
-      <strong class="me-auto">Added to Shopping List</strong>
-      <button type="button" class="btn-close btn-close-white" (click)="hideToast()" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-      {{ toastMessage }}
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="toast bg-success text-white border-0 shadow-lg" [class.show]="showToast" role="alert">
+    <div class="d-flex">
+      <div class="toast-body d-flex align-items-center">
+        <i class="fas fa-check-circle me-2 fs-5"></i>
+        {{ toastMessage }}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto shadow-none" (click)="hideToast()"></button>
     </div>
   </div>
 </div>

@@ -1,14 +1,21 @@
-<a class="list-group-item clearfix border p-1" style="max-width:380px; cursor:pointer; border-radius: 20px; margin: 10px;"
-  [routerLink]="[recipe.id]" routerLinkActive="active">
-  <div class="float-start" style="float: left;">
-    <h4 class="list-group-item-heading">
-      {{recipe.name}}
-    </h4>
-    <p class="list-group-item-text">
-      {{recipe.description}}</p>
+<div
+  class="recipe-card-container mb-4"
+  [routerLink]="[recipe.id]"
+  routerLinkActive="active"
+  style="cursor: pointer;">
+  <div class="card recipe-card h-100">
+    <div class="row g-0">
+      <div class="col-4">
+        <div class="image-wrapper">
+          <img [src]="recipe.imagePath" class="img-fluid rounded-start recipe-image" [alt]="recipe.name">
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="card-body">
+          <h5 class="card-title text-truncate">{{ recipe.name }}</h5>
+          <p class="card-text text-muted recipe-desc">{{ recipe.description }}</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="float-end" style="float: left;">
-    <img [src]="recipe.imagePath" class="img-thumbnail" alt="{{recipe.name}}" style="height: 120px; width: 120px;">
-  </div>
-
-</a>
+</div>

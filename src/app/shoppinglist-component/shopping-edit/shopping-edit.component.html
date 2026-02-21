@@ -1,37 +1,64 @@
 <div class="row">
-  <div class="col-xs-12">
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-      <div class="row">
-        <div class="col-sm-5 form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" name="name" ngModel required>
+  <div class="col-12">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="bg-light p-3 rounded-3 shadow-sm">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="name" class="form-label small fw-bold text-muted text-uppercase">Ingredient Name</label>
+          <input
+            type="text"
+            class="form-control form-control-sm border-0 shadow-none bg-white p-2"
+            id="name"
+            name="name"
+            ngModel
+            required
+            placeholder="e.g. Apples">
         </div>
 
-        <div class="col sm-2">
-          <label for="amount">Amount</label>
-          <input type="number" min="0" step="any" class="form-control" id="amount" name="amount" ngModel required
-            pattern="^(0|[1-9]\d*)(\.\d+)?$">
+        <div class="col-6 col-md-3">
+          <label for="amount" class="form-label small fw-bold text-muted text-uppercase">Amount</label>
+          <input
+            type="number"
+            min="0"
+            step="any"
+            class="form-control form-control-sm border-0 shadow-none bg-white p-2"
+            id="amount"
+            name="amount"
+            ngModel
+            required
+            pattern="^(0|[1-9]\d*)(\.\d+)?$"
+            placeholder="0">
         </div>
-        <div class="col sm-2">
-          <label for="amount">Uom</label>
-          <input type="text" class="form-control" id="uom" name="uom" ngModel required>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <button class="btn btn-success" type="submit" [disabled]="!f.valid">{{editMode ? "Update" :
-              "Add"}}</button>
-
-            <button class="btn btn-danger" type="button" (click)="onDelete()" *ngIf="editMode">Delete</button>
-            <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
-            <button class="btn btn-warning" type="button" (click)="onDeleteAll()" *ngIf="!editMode">Clear Shopping
-              List</button>
-          </div>
-
+        <div class="col-6 col-md-3">
+          <label for="uom" class="form-label small fw-bold text-muted text-uppercase">Unit</label>
+          <input
+            type="text"
+            class="form-control form-control-sm border-0 shadow-none bg-white p-2"
+            id="uom"
+            name="uom"
+            ngModel
+            required
+            placeholder="e.g. cups">
         </div>
 
+        <div class="col-12 mt-4 d-flex flex-wrap gap-2">
+          <button class="btn btn-success btn-sm px-4 rounded-pill" type="submit" [disabled]="!f.valid">
+            <i class="fas" [ngClass]="editMode ? 'fa-save' : 'fa-plus'"></i>
+            {{editMode ? " Update" : " Add Item"}}
+          </button>
+
+          <button class="btn btn-danger btn-sm px-4 rounded-pill" type="button" (click)="onDelete()" *ngIf="editMode">
+            <i class="fas fa-trash-alt"></i> Delete
+          </button>
+
+          <button class="btn btn-outline-secondary btn-sm px-4 rounded-pill border-0 bg-transparent" type="button" (click)="onClear()">
+            <i class="fas fa-rotate-left"></i> Clear
+          </button>
+
+          <button class="btn btn-outline-danger btn-sm px-4 rounded-pill ms-auto" type="button" (click)="onDeleteAll()" *ngIf="!editMode">
+            <i class="fas fa-broom"></i> Clear List
+          </button>
+        </div>
       </div>
-
     </form>
   </div>
-
 </div>

@@ -42,6 +42,7 @@
 
 @media print {
   /* Hide all screen-only elements */
+  .recipe-detail-container > .row:not(.print-only),
   .step-item,
   .badge,
   .btn,
@@ -395,5 +396,97 @@
   .ingredient-item {
     padding: 5px 15px;
     margin-bottom: 12px;
+  }
+}
+
+.recipe-detail-container {
+  padding-top: 20px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-image-wrapper {
+  border-radius: 20px;
+  overflow: hidden;
+  height: 350px;
+}
+
+.detail-image-wrapper img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.detail-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+.recipe-title {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.text-accent {
+  color: var(--accent-color);
+}
+
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.2);
+}
+
+.step-num-container {
+  min-width: 32px;
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  background-color: var(--accent-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.instruction-text {
+  color: #444;
+  line-height: 1.6;
+}
+
+.badge {
+  padding: 0.5rem 0.8rem;
+  border-radius: 50px;
+}
+
+.toast {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.show {
+  display: block;
+}
+
+@media print {
+  .navbar, .btn, .toast-container, .recipe-detail-container > .row:not(.print-only) {
+    display: none !important;
+  }
+
+  .recipe-detail-container {
+    padding: 0;
+  }
+
+  .print-only {
+    display: block !important;
   }
 }
